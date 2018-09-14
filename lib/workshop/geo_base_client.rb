@@ -1,9 +1,8 @@
-require './http_client'
-require './geo_parser'
-
 module Workshop
-  class GeoBaseClient
-    def get_location(ip, params)
+  module GeoBaseClient
+    def self.get_location(ip = nil, params = 'country, city')
+      return "specify ip adress" if ip.nil? || ip.empty?
+
       response = HttpClient.make_response(ip)
       return response[:message] unless response[:succeed]
 

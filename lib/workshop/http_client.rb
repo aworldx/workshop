@@ -12,7 +12,7 @@ module Workshop
         body: response.read,
       }
     rescue OpenURI::HTTPError => e
-       { message: e.message }
+       { succeed: false, message: e.message }
     end
   end
 end

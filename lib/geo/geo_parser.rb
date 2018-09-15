@@ -1,17 +1,15 @@
 require 'nokogiri'
 
 module GeoParser
-  def self.parse_response(response, params)
+  def self.parse_response(response)
     xml_doc = Nokogiri::XML(response)
+    options = [:city, :country]
 
-    params.split(',').reduce({}) do |acc, param|
-      key = param.strip.downcase
-      next if key.empty?
-
-      node = xml_doc.at_css("//#{key}")
+    options.reduce({}) do |acc, param|
+      node = xml_doc.at_css("//#{param.to_s}")
       value = node ? node.text : ''
 
-      acc.update(key.to_sym => value)
+      acc.update(param => value)
     end
   end
 end

@@ -1,10 +1,8 @@
 require 'open-uri'
 
 module HttpClient
-  API_URL = "http://ipgeobase.ru:7020/geo?ip="
-
-  def self.make_response(ip)
-    response = open("#{API_URL}#{ip}")
+  def self.make_response(addr)
+    response = open(addr)
     {
       succeed: response.status[0] == "200",
       message: response.status[1],

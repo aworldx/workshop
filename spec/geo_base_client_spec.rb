@@ -1,6 +1,9 @@
 require 'workshop'
+require 'webmock/rspec'
 
 describe Workshop::GeoBaseClient do
+  WebMock.allow_net_connect!
+
   context "invoke method get_location without arguments" do
     before(:each) { @response = Workshop::GeoBaseClient.get_location() }
 
@@ -42,6 +45,17 @@ describe Workshop::GeoBaseClient do
 
       expect(@response.has_key?(:blah)).to be_truthy
       expect(@response[:blah]).to be_empty
+    end
+  end
+
+  context "when Service Unavailable" do
+    before do
+      WebMock.stub_request(:any, /.*/).to_return(body: "errors", status: [503, "Service Unavailable"])
+      @response = Workshop::GeoBaseClient.get_location("109.248.241.51")
+    end
+
+    it "returns message Service Unavailable" do
+      expect(@response).to eq("503 Service Unavailable")
     end
   end
 end

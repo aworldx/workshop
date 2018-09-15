@@ -7,7 +7,8 @@ module Weather
     desc "weather", "returns weather in specified city"
     method_option :service, :required => true
     def weather(city)
-      puts WeatherService.current_weather(city, options[:service])
+      result = WeatherService.current_weather(city, options[:service])
+      puts result.map {|k, v| "#{k}: #{v}"}.join(', ')
     end
   end
 end

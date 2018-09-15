@@ -1,5 +1,5 @@
 # Workshop
-*** 1 задание
+## 1 задание
 Примеры использования
 ```ruby
 GeoClient.get_location("109.248.241.51")
@@ -10,7 +10,7 @@ GeoClient.get_location("109.248.241.51")
   :country => "RU"
 }
 ```
-*** 2 задание
+## 2 задание
 ```
 weather --service meta_weather london
 

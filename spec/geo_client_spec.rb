@@ -1,10 +1,11 @@
 require 'geo_client'
-require 'helpers/test_http_client'
+require 'helpers/http_client'
 
 describe GeoClient do
   context "#get_location" do
     before(:each) do
-      @response = GeoClient.get_location("109.248.241.51", TestHttpClient)
+      HttpClient.fixture_name = 'geo_response'
+      @response = GeoClient.get_location("109.248.241.51", HttpClient)
     end
 
     it %"returns structure with city and country" do

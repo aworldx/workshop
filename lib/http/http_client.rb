@@ -1,7 +1,7 @@
 require 'open-uri'
 
 module HttpClient
-  def self.make_response(addr)
+  def self.make_request(addr)
     response = open(addr)
     {
       succeed: response.status[0] == "200",

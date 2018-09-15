@@ -3,7 +3,7 @@ module GeoClient
   autoload 'GeoParser', 'geo/geo_parser'
 
   API_URL = "http://ipgeobase.ru:7020/geo?ip="
-
+  # TODO: add hash options
   def self.get_location(ip = nil, http_client = HttpClient)
     return "specify ip adress" if ip.nil? || ip.empty?
 

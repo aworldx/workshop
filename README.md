@@ -2,7 +2,7 @@
 
 Примеры использования
 ```ruby
-Workshop::GeoBaseClient.get_location("109.248.241.51", 'city, country')
+GeoClient.get_location("109.248.241.51", 'city, country')
 
 =>
 {
@@ -10,7 +10,7 @@ Workshop::GeoBaseClient.get_location("109.248.241.51", 'city, country')
   :country => "RU"
 }
 
-Workshop::GeoBaseClient.get_location("109.248.241.51", 'city, foo')
+GeoClient.get_location("109.248.241.51", 'city, foo')
 
 =>
 {
@@ -18,7 +18,7 @@ Workshop::GeoBaseClient.get_location("109.248.241.51", 'city, foo')
   :foo => ""
 }
 
-Workshop::GeoBaseClient.get_location("blah.248.241.51", 'city')
+GeoClient.get_location("blah.248.241.51", 'city')
 
 =>
 {

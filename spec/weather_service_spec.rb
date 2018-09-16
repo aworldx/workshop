@@ -33,7 +33,7 @@ describe WeatherForecast do
       expect(response[:weather_state]).to eq('Heavy Cloud')
     end
 
-    it "" do
+    it "custom service" do
       @options[:custom_services] = { test_service1: TestService.new }
 
       wf = WeatherForecast.new(@options)

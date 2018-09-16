@@ -1,28 +1,46 @@
-require 'weather_service'
+require 'weather/weather_forecast'
 require 'helpers/test_http_client'
-require 'byebug'
+require 'helpers/test_service'
 
-describe WeatherService do
-  context "#current_weather" do
-    it %"meta_weather service returns current weather in London" do
-      @response = WeatherService.current_weather("london", :meta_weather, TestHttpClient)
+describe WeatherForecast do
+  before(:each) { @options = { http_client: TestHttpClient } }
+  context "#get_info" do
+    it %"use forecast without setting service" do
+      wf = WeatherForecast.new(@options)
+      response = wf.get_info("london")
 
-      expect(@response[:temperature]).to eq(18)
-      expect(@response[:weather_state]).to eq('Heavy Cloud')
+      expect(response[:temperature]).to eq(18)
+      expect(response[:weather_state]).to eq('Heavy Cloud')
     end
 
-    it %"open_weather service returns current weather in London" do
-      @response = WeatherService.current_weather("london", :open_weather, TestHttpClient)
+    it %"use forecast with specify service" do
+      # setting default from options
+      @options[:default_service_name] = :open_weather
+      wf = WeatherForecast.new(@options)
+      response = wf.get_info("london")
 
-      expect(@response[:temperature]).to eq(14)
-      expect(@response[:weather_state]).to eq('Clouds')
+      expect(response[:temperature]).to eq(14)
+      expect(response[:weather_state]).to eq('Clouds')
+
+      # setting default from client interface
+      response = wf.get_info("london", :meta_weather)
+      expect(response[:temperature]).to eq(18)
+      expect(response[:weather_state]).to eq('Heavy Cloud')
+
+      # repeat request without setting service
+      response = wf.get_info("london")
+      expect(response[:temperature]).to eq(18)
+      expect(response[:weather_state]).to eq('Heavy Cloud')
     end
 
-    it %"foo service returns current weather in London" do
-      @response = WeatherService.current_weather("london", :foo, TestHttpClient)
+    it "" do
+      @options[:custom_services] = { test_service1: TestService.new }
 
-      expect(@response[:temperature]).to eq(-999)
-      expect(@response[:weather_state]).to eq('brrrrr')
+      wf = WeatherForecast.new(@options)
+      response = wf.get_info("london", :test_service1)
+
+      expect(response[:temperature]).to eq(999)
+      expect(response[:weather_state]).to eq('test')
     end
   end
 end

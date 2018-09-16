@@ -1,7 +1,5 @@
 module TestHttpClient
   class << self
-    attr_accessor :fixture_name
-
     def make_request(addr)
       response = {
         succeed: true,

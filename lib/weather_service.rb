@@ -37,8 +37,8 @@ module WeatherService
       }
     end
 
-    def get_service_val(service_name, param, val, http_client)
-      url = get_config(service_name, param, val)
+    def get_service_val(service_name, param_name, param_value, http_client)
+      url = get_config(service_name, param_name, param_value)
       response = http_client.make_request(url)
       body = JSON.parse(response[:body])
     end

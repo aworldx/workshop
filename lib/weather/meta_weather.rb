@@ -1,10 +1,10 @@
 require 'json'
 
-module MetaWeather
+class MetaWeather
   CITY_URL = 'https://www.metaweather.com/api/location/search/?query=@param'
   URL = 'https://www.metaweather.com/api/location/@param'
 
-  def self.get_info(city, http_client)
+  def get_info(city, http_client)
     result = get_location_id(city, http_client)
     city_id = result[0]['woeid']
 
@@ -18,10 +18,9 @@ module MetaWeather
     }
   end
 
-  def self.get_location_id(city, http_client)
+  def get_location_id(city, http_client)
     url = CITY_URL.gsub('@param', city)
     response = http_client.make_request(url)
     body = JSON.parse(response[:body])
   end
 end
-

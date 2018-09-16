@@ -10,15 +10,13 @@ class WeatherForecast
   end
 
   def get_info(city, service_name = nil)
-    # user can specify service name 1 time
-    @default_service_name = service_name if service_name
-    get_service(@default_service_name).get_info(city, @http_client)
+    get_service(service_name || @default_service_name).get_info(city, @http_client)
   end
 
   def self.base_services
     {
-      meta_weather: MetaWeather,
-      open_weather: OpenWeather
+      meta_weather: MetaWeather.new,
+      open_weather: OpenWeather.new
     }
   end
 

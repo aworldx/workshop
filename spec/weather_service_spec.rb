@@ -26,11 +26,6 @@ describe WeatherForecast do
       response = wf.get_info("london", :meta_weather)
       expect(response[:temperature]).to eq(18)
       expect(response[:weather_state]).to eq('Heavy Cloud')
-
-      # repeat request without setting service
-      response = wf.get_info("london")
-      expect(response[:temperature]).to eq(18)
-      expect(response[:weather_state]).to eq('Heavy Cloud')
     end
 
     it "custom service" do

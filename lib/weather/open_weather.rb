@@ -1,10 +1,10 @@
 require 'json'
 
-module OpenWeather
+class OpenWeather
   URL = %q'http://openweathermap.org/data/2.5/weather?q=@param
           &appid=b6907d289e10d714a6e88b30761fae22'
 
-  def self.get_info(city, http_client)
+  def get_info(city, http_client)
     url = URL.gsub('@param', city)
     response = http_client.make_request(url)
     body = JSON.parse(response[:body])

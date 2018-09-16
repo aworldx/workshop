@@ -5,7 +5,6 @@ require 'byebug'
 describe WeatherService do
   context "#current_weather" do
     it %"meta_weather service returns current weather in London" do
-      TestHttpClient.fixture_name = 'meta_weather_response.json'
       @response = WeatherService.current_weather("london", :meta_weather, TestHttpClient)
 
       expect(@response[:temperature]).to eq(18)
@@ -13,7 +12,6 @@ describe WeatherService do
     end
 
     it %"open_weather service returns current weather in London" do
-      TestHttpClient.fixture_name = 'open_weather_response.json'
       @response = WeatherService.current_weather("london", :open_weather, TestHttpClient)
 
       expect(@response[:temperature]).to eq(14)

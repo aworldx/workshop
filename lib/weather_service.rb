@@ -6,7 +6,7 @@ module WeatherService
 
   class << self
     def current_weather(city, service_name, http_client = HttpClient)
-      self.send(service_name, city, HttpClient)
+      self.send(service_name, city, http_client)
     end
 
     def meta_weather(city, http_client)

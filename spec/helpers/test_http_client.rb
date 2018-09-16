@@ -1,8 +1,8 @@
-module HttpClient
+module TestHttpClient
   class << self
     attr_accessor :fixture_name
 
-    def make_request(ip)
+    def make_request(param = nil)
       {
         succeed: true,
         message: "OK",

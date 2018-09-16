@@ -6,7 +6,7 @@ module TestHttpClient
       {
         succeed: true,
         message: "OK",
-        body: File.open("spec/fixtures/#{@fixture_name}.xml").read
+        body: File.open("spec/fixtures/#{@fixture_name}").read
       }
     end
   end
